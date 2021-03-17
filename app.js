@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Frontend Routes
+// Frontend Routes -- NOT IMPLEMENTED
 app.use('/', indexRouter);
 
 //API Routes
