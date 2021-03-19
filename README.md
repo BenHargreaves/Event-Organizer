@@ -9,7 +9,7 @@ The Event Organizer app is designed to be fully containerized with Docker so it 
 ### Using Docker (Recommended)
 The simplest (and best) way to get up and running is with Docker. Following the steps below will start the application container in production mode, spin up a Postgres DB container, and define the necessary table schema along with some basic seed data. 
 
-1. Clone this repo
+1. Fork & Clone this repo
 2. Install Docker (https://docs.docker.com/get-docker/)
 3. Open a terminal session in the same location that contains the `Dockerfile` and `docker-compose.yml` files in this project
 4. Build the containers using  
@@ -29,7 +29,7 @@ ports:
 
 ### Without Docker (Untested)
 As this app was designed to run in a container, it is definitely recommended you take the Docker setup route instead. However if you would rather not use Docker, you should be able to complete the following steps to get up and running
-1. Clone this repo
+1. Fork & Clone this repo
 2. Install NodeJS (https://nodejs.org/en/download/)
 3. Install Postgres (https://www.postgresql.org/download/)
 4. Open your Postgres console and run **ALL** the commands in the `docker_postgres_init.sql` file to define the necessary table schema
