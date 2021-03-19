@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "64ecb544-0d25-430c-9505-f06c2316535e",
+		"name": "Event Organizer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Availability",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/availability?date=20210102&duration=45",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"availability"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "20210102"
+						},
+						{
+							"key": "duration",
+							"value": "45"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Busy Block",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"startTime\": \"2021-01-02T10:15:00-00:00\",\r\n    \"endTime\": \"2021-01-02T11:00:00-00:00\",\r\n    \"participant\": \"Jade\",\r\n    \"description\": \"Daily standup\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/schedule",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"schedule"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

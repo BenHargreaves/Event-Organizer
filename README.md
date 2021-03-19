@@ -49,7 +49,8 @@ $ npm run start-dev
 ```
 
 ## Usage
-### Add Busy Block
+The quickest way to start consuming the API after you're set up, is to import the included `Event Organizer.postman_collection.json` file into postman directly.  (https://www.postman.com/downloads/)  
+### Post Busy Block
 To add a new "Busy block" which sets a user as unavailable for that time, make a POST request to `localhost:3000/api/schedule` which accepts the following parameters in the request body as JSON
 ```
 startTime:    Required. DateTime string representing the start of the busy block
