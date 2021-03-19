@@ -17,7 +17,7 @@ The simplest (and best) way to get up and running is with Docker. Following the 
 5. Start the containers using  
 `docker-compose up`
 
-And you're ready to go! Once you're done with this app, you can teardown all the containers created  using
+And you're ready to go! Once you're done with this app, you can teardown all the containers created using  
 `docker-compose down`
 
 > NOTE -- Docker Compose will start the App container listening on **Port 3000** and postgres DB container listening on **Port 5432**. If you already have any other services or containers listening on either of these ports, you may need to change the containers port bindings in the `docker-compose.yml` file
