@@ -2,14 +2,29 @@
 version: '3.1'
 
 services:
-
-  postgres:
+  database:
+    container_name: database
     image: postgres
     restart: always
     environment: 
-      - POSTGRES_PASSWORD=admin 
-
+      - POSTGRES_PASSWORD=admin
     ports: 
       - "5432:5432"
     volumes: 
       - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+
+  api:
+    build: .
+    container_name: api
+    restart: always
+    links:
+      - database
+    environment: 
+      - PORT=3000
+      - DB_USER=postgres
+      - DB_HOST=database
+      - DB_DATABASE=postgres
+      - DB_PASSWORD=admin
+      - DB_PORT=5432
+    ports:
+      - "3000:3000"

@@ -1,18 +1,20 @@
 const { Client } = require('pg')
 
 async function GetClient(){
+    ///DB env vars defined in docker-compose file
     const client = new Client({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'postgres',
-        password: 'admin',
-        port: 5432,
+        user: process.env.DB_USER || 'postgres',
+        host: process.env.DB_HOST || 'localhost',
+        database: process.env.DB_DATABASE || 'postgres',
+        password: process.env.DB_PASSWORD || 'admin',
+        port: process.env.DB_PORT || 5432,
     })
     client.connect()
 
     return client;
 }
 
+// Fetch participant info by username - returns null if not found
 async function GetParticipantInfoAsync(userName){
     const client = await GetClient();
     try {
@@ -37,8 +39,7 @@ async function InsertParticipantInfoAsync(userName){
     }
 }
 
-
-// block 1 - 9/930 - avail [x,y,z] unavail[a,b,c]
+// Updates used_blocks or inserts if it doesn't currently exist
 async function UpsertUserAvailabilityAsync(usedblocks, participant_id, date) {
     const client = await GetClient();
     try {
@@ -47,8 +48,7 @@ async function UpsertUserAvailabilityAsync(usedblocks, participant_id, date) {
             await client.query('INSERT INTO availabilityByDay(participant_id, date, used_blocks) VALUES($1, $2, $3)', [participant_id, date, usedblocks]);
         } else {
             await client.query('UPDATE availabilityByDay SET used_blocks = $1 WHERE participant_id = $2 AND DATE = $3 ', [usedblocks, participant_id, date]);
-        }
-        
+        }     
     } catch (err) {
         console.log(err.stack);
     } finally {
@@ -80,11 +80,11 @@ async function InsertBusyBlockAsync(busyBlock) {
     }
 }
 
+//Get all users availability on the specified date
 async function GetAllAvailabilityByDayAsync(date) {
     const client = await GetClient();
     try {
         const res = await client.query('SELECT participant_id, name, date, used_blocks FROM availabilityByDay INNER JOIN participants ON availabilityByDay.participant_id = participants.id WHERE availabilityByDay.date = $1', [date]);
-        console.log(res.rows)
         return res.rows
     } catch (err) {
         console.log(err.stack);
@@ -93,11 +93,12 @@ async function GetAllAvailabilityByDayAsync(date) {
     }
 }
 
+// Returns users with no "used_blocks" on the specified day
+// no "used_blocks" means they are available all day
 async function GetUsersWithNoEventsByDayAsync(date) {
     const client = await GetClient();
     try {
         const res = await client.query('SELECT name FROM participants WHERE id NOT IN ( SELECT participant_id FROM availabilityByDay WHERE date = $1)', [date]);
-        console.log(res.rows)
         return res.rows
     } catch (err) {
         console.log(err.stack);

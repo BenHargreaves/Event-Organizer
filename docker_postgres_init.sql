@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS participants;
 DROP TABLE IF EXISTS busyblocks;
-DROP TABLE IF EXISTS userAvailabilityByDay;
+DROP TABLE IF EXISTS availabilityByDay;
 
 CREATE TABLE participants(
     id INT GENERATED ALWAYS AS IDENTITY,
@@ -32,4 +32,7 @@ CREATE TABLE availabilityByDay(
 	    REFERENCES participants(id)
 	    ON DELETE CASCADE
 );
+
+INSERT INTO participants(name)
+VALUES ('Jade'), ('Mike');
 
