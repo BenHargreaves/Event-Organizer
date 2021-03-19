@@ -3,6 +3,8 @@ const { addMinutes } = require('date-fns')
 
 //32 = number of 15 min blocks between 9a-5p
 const BLANK_USED_BLOCKS = '0'.repeat(32);
+//Used in calculating availability blocks 
+const DAY_LENGTH_IN_MS = 28800000;
 
 /* Public (exported) functions */
 async function UpdateAvailability(busyBlock) {
@@ -132,15 +134,19 @@ function CalculateUsedBlocks(busyBlock, usedBlocks){
     // 11:00 - 9:00 = 2hrs
     // 1.5hrs / 15(mins) = 6 and 2hrs / 15(mins) = 8
     // so need to update used_blocks string between index 6 and 8
-    var startblock = start.getTime() - workstart.getTime();
-    var endblock = end.getTime() - workstart.getTime();
+
+    //The Math.Min / Max here is to make sure that block length doesnt begin before 9am (startblock would be in negative)
+    // or extend past 5pm. Otherwise the calculated block will be longer than 32 characters
+    var startblock = Math.max((start.getTime() - workstart.getTime()), 0);
+    var endblock = Math.min((end.getTime() - workstart.getTime()), DAY_LENGTH_IN_MS);
 
     let startBlockIdx = (startblock / 60000) / 15;
     let endBlockIdx = (endblock / 60000) / 15;
 
+
     // replace all digits between start and end index with 1's to signify this participant is unavailable for those slots
-    let newUsedBlockString = usedBlocks.substr(0, startBlockIdx);
-    newUsedBlockString = newUsedBlockString + '1'.repeat((endBlockIdx - startBlockIdx))
+    let newUsedBlockString = usedBlocks.substring(0, startBlockIdx);
+    newUsedBlockString = newUsedBlockString + '1'.repeat(endBlockIdx - startBlockIdx)
     newUsedBlockString = newUsedBlockString + usedBlocks.substr(endBlockIdx)
     return newUsedBlockString
 }
