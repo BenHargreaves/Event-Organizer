@@ -8,7 +8,7 @@ The Event Organizer app is designed to be fully containerized with Docker so it 
 
 ## Project Setup
 ### Using Docker (Recommended)
-The simplest (and best) way to get up and running is through Docker. Following the steps below will start the application in production mode, spin up a Postgres container, and define the necessary table schema along with some basic seed data. 
+The simplest (and best) way to get up and running is through Docker. Following the steps below will start the application container in production mode, spin up a Postgres DB container, and define the necessary table schema along with some basic seed data. 
 
 1. Clone this repo
 2. Install Docker (https://docs.docker.com/get-docker/)
