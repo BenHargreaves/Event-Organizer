@@ -1,5 +1,4 @@
 # Event Organizer
-## About
 The Event organizer app takes a peek at everyones calendars, and then suggests the best time slots to organize an event on a given day. It aims to return only timeslots where the most amount of participants possible will be able to attend.
 
 Users can also add 'Busy Blocks' to their calendar, to mark that participant as unavailable during those timeslots
