@@ -1,9 +1,9 @@
 # Event Organizer
-The Event organizer app takes a peek at everyones calendars, and then suggests the best time slots to organize an event on a given day. It aims to return only timeslots where the most amount of participants possible will be able to attend.
+The Event organizer app takes a peek at everyone's calendars, and then suggests the best time slots available on a given day. It aims to return only timeslots with the highest number of participants able to attend.
 
 Users can also add 'Busy Blocks' to their calendar, to mark that participant as unavailable during those timeslots
 
-The Event Organizer app is designed to be fully containerized with Docker so it can be spun up or redeployed quickly. It runs on an NodeJS/Express based API, with Postgres DB to store the particpants and their respective availability.
+The Event Organizer app is designed to be fully containerized with Docker so it can be spun up or redeployed quickly. It runs on a NodeJS/Express based API, with Postgres DB to store the particpants and their respective availability.
 
 ## Project Setup
 ### Using Docker (Recommended)
