@@ -8,7 +8,7 @@ The Event Organizer app is designed to be fully containerized with Docker so it 
 
 ## Project Setup
 ### Using Docker (Recommended)
-The simplest (and best) way to get up and running is through Docker. Following the steps below will start the application container in production mode, spin up a Postgres DB container, and define the necessary table schema along with some basic seed data. 
+The simplest (and best) way to get up and running is with Docker. Following the steps below will start the application container in production mode, spin up a Postgres DB container, and define the necessary table schema along with some basic seed data. 
 
 1. Clone this repo
 2. Install Docker (https://docs.docker.com/get-docker/)
@@ -18,15 +18,15 @@ The simplest (and best) way to get up and running is through Docker. Following t
 5. Start the containers using  
 `docker-compose up`
 
-And you're ready to go! Once you're done with this app, you can run the following command to teardown all the containers created  
+And you're ready to go! Once you're done with this app, you can teardown all the containers created  using
 `docker-compose down`
 
-NOTE -- Docker Compose will start the App container listening on **Port 3000** and postgres DB container listening on **Port 5432**. If you already have any other services or containers listening on either of these ports, you may need to change the containers port bindings in the `docker-compose.yml` file
- - e.g. if you already have another app listening on port 3000, change the "Ports" section under the "api" service to something like
-     ```
-    ports:  
-       "3080:3000"
-    ```
+> NOTE -- Docker Compose will start the App container listening on **Port 3000** and postgres DB container listening on **Port 5432**. If you already have any other services or containers listening on either of these ports, you may need to change the containers port bindings in the `docker-compose.yml` file
+e.g. if you already have another app listening on port 3000, change the "Ports" section under the "api" service to something like:  
+```
+ports:  
+   "3080:3000"
+```
 
 ### Without Docker (Untested)
 As this app was designed to run in a container, it is definitely recommended you take the Docker setup route instead. However if you would rather not use Docker, you should be able to complete the following steps to get up and running
@@ -65,7 +65,7 @@ Content-Length: 160
 ```
 
 ### Get Availability
-Make a Get request to `localhost:3000/api/availability` with the query string parameters `date` and `duration` included to return all time slots of length `duration` on `date` which have the most participants available to attend. The search assumes a standard workday of 9am to 5pm, so it `wont look for timeslots before 9am or after 5pm`
+Make a Get request to `localhost:3000/api/availability` with the query string parameters `date` and `duration` included to return all time slots of length `duration` on `date` which have the most participants available to attend. The search assumes a standard workday of 9am to 5pm, so it wont look for timeslots before 9am or after 5pm
 
 Accepts the following querystring parameters
 ```
