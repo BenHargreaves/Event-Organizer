@@ -13,16 +13,22 @@ The simplest (and best) way to get up and running is with Docker. Following the 
 2. Install Docker (https://docs.docker.com/get-docker/)
 3. Open a terminal session in the same location that contains the `Dockerfile` and `docker-compose.yml` files in this project
 4. Build the containers using  
-`docker-compose build`
+```Shell
+$ docker-compose build
+```
 5. Start the containers using  
-`docker-compose up`
+```Shell
+$ docker-compose up
+```
 
 And you're ready to go! Once you're done with this app, you can teardown all the containers created using  
-`docker-compose down`
+```Shell
+$ docker-compose down
+```
 
 > NOTE -- Docker Compose will start the App container listening on **Port 3000** and postgres DB container listening on **Port 5432**. If you already have any other services or containers listening on either of these ports, you may need to change the containers port bindings in the `docker-compose.yml` file.  
 For example, if you already have another app listening on port 3000, change the "Ports" section under the "api" service to something like:  
-```
+```Dockerfile
 ports:  
    "3080:3000"
 ```
@@ -34,9 +40,13 @@ As this app was designed to run in a container, it is definitely recommended you
 3. Install Postgres (https://www.postgresql.org/download/)
 4. Open your Postgres console and run **ALL** the commands in the `docker_postgres_init.sql` file to define the necessary table schema
 5. Open a terminal window in the same location as the `package.json` file in this project and then run  
-`npm install`
+```Shell
+$ npm install
+```
 6. After the packages have finishing downloading, run the following command to run the app in dev mode  
-`npm run start-dev`
+```Shell
+$ npm run start-dev
+```
 
 ## Usage
 ### Add Busy Block
